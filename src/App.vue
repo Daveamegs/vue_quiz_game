@@ -1,15 +1,43 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <h1 v-html="this.question"></h1>
+
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+const API = "https://opentdb.com/api.php?amount=1";
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  methods: {
+    getQuiz() {}
+  },
+  data(){
+    return{
+      question: undefined,
+      correctAnswer: undefined,
+      inCorrectAnswers: undefined
+    }
+  },
+
+  computed: {
+    answers() {
+      var answers = JSON.parse(JSON.stringify(this.inCorrectAnswers))
+      answers.push(this.correctAnswer)
+
+      return answers;
+    }
+  },
+
+  created() {
+    this.axios.get(API).then((response) => {
+      // console.log(response.data.results)
+      var questionResults = response.data.results;
+      this.question = questionResults[0].question;
+      this.correctAnswer = questionResults[0].correct_answer;
+      this.inCorrectAnswers = questionResults[0].incorrect_answers;
+    })
   }
 }
 </script>
