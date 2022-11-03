@@ -25,7 +25,7 @@
       <h4 v-else>
         &#10060; Sorry, your answer is incorrect, the correct answer is "{{ this.correctAnswer }}"
       </h4>
-      <button @click="getNewQuestion()" type="button">Next Question</button>
+      <button @click="getNewQuestion()" type="button" class="next-question">Next Question</button>
     </section>
   </div>
 </template>
@@ -103,5 +103,22 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+
+  button.send, button.next-question{
+    appearance: none;
+    border: none;
+    border-radius: 10px;
+    background-color: #0101ef;
+    color: #fff;
+    font-size: 20px;
+    padding: 15px 45px;
+    margin-top: 20px;
+    cursor: pointer;
+    // text-transform: uppercase;
+  }
+
+  input, label{
+    font-size: 18px;
+  }
 }
 </style>
